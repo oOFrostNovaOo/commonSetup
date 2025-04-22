@@ -1,9 +1,9 @@
 network:
   version: 2
   ethernets:
-    ens33:
+    {{ default_interface }}:
       dhcp4: no
       addresses: [{{ ip_address }}/{{ subnet_mask }}]
       gateway4: {{ gateway }}
       nameservers:
-        addresses: {{ dns_servers }}
+        addresses: [{{ dns_servers | join(', ') }}]

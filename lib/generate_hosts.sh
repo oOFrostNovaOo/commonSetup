@@ -49,7 +49,8 @@ cat <<EOF > host_vars/${HOSTNAME}.yml
 ip_address: $IP
 subnet_mask: $SUBNET_MASK
 gateway: $GATEWAY
-dns_servers: $DNS
+dns_servers: 
+$(printf '  - %s\n' "${DNS[@]}")
 EOF
 echo "$HOSTNAME ansible_host=$IP" >> inventory.ini
 echo "Created leaders $HOSTNAME with IP $IP"
@@ -70,7 +71,8 @@ for OCTET in $(seq $START $END); do
 ip_address: $IP
 subnet_mask: $SUBNET_MASK
 gateway: $GATEWAY
-dns_servers: $DNS
+dns_servers: 
+$(printf '  - %s\n' "${DNS[@]}")
 EOF
 
   echo "Created $HOSTNAME with IP $IP"

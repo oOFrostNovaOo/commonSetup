@@ -14,11 +14,15 @@
       set_fact:
         netplan_path: "{{ netplan_files.files[0].path }}"
 
-    - name: backup netplaten config with timestamp
+    - name: backup netplan config with timestamp
       command: cp {{ netplan_path }} {{ netplan_path }}.{{ ansible_date_time.iso8601_basic_short }}.bak
       when: netplan_files.matched > 0
       register: backup_result
       ignore_errors: yes
+
+    - name: Set default interface fact
+      set_fact:
+        default_interface: "{{ ansible_default_ipv4.interface }}"
 
     - name: Update netplan config with static IP
       template:

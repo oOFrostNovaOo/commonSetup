@@ -1,7 +1,7 @@
-- name: Set static IP for workers
+- name: Set hostname and timezone
   hosts: all
   become: yes
-  vars_files:
+
   tasks:
     - name: Set hostname using hostnamectl
       become: true
