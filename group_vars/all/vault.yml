@@ -1,0 +1,4 @@
+---
+ansible_user: ubuntu
+ansible_ssh_pass: qwe123
+ansible_become_pass: qwe123   # nếu sudo pass trùng password SSH

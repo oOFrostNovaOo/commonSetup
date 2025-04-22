@@ -11,9 +11,12 @@ function ansible_change_IP() {
     log_info "Changing IP address..."
 
     #kiem tra ton tai cua file vault.yml
-    if [ ! -f ./vault.yml ]; then
+    if [ ! -f ./group_vars/all/vault.yml ]; then
         echo "File vault.yml not found. Please create it first."
-        ansible-vault create ./vault.yml
+        exit 1
+    else
+        # Encrypt vault file
+        ansible-vault encrypt ./group_vars/all/vault.yml #--vault-password-file ~/.ansible_vault_pass.txt
     fi
     #kiem tra ton tai cua file inventory_pre.ini
     if [ ! -f ./inventory_pre.ini ]; then
@@ -27,7 +30,7 @@ function ansible_change_IP() {
         sudo apt install -y sshpass
     fi
     # Run Ansible tp change IP
-    ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory_pre.ini ./playbooks/setup_ip_clients.yml  --ask-pass  --ask-vault-pass  
+    ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory_pre.ini ./playbooks/setup_ip_clients.yml --ask-vault-pass  
 }
 
 function ansible_change_hostname_timezone() {
