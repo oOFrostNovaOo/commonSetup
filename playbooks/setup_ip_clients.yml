@@ -1,8 +1,8 @@
 - name: Set static IP for workers
   hosts: all
   become: yes
-  vars_files:
-  - ../vault.yml
+  # vars_files:
+  # - ../vault.yml
   tasks:
     - name: Find current netplan config file
       find:
