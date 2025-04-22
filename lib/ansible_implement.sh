@@ -40,7 +40,7 @@ function ansible_change_IP() {
     ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory_pre.ini ./playbooks/setup_ip_clients.yml --ask-vault-pass
 
     #remove vault file
-    rm -f ./group_vars/all/vault.yml
+    rm -rf ./group_vars/all
 }
 
 function ansible_change_hostname_timezone() {
