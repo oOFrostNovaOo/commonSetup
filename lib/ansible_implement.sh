@@ -42,7 +42,7 @@ function ansible_change_IP() {
 
 function ansible_change_hostname_timezone() {
     # Ansible changes hostname
-    ansible-playbook -i inventory.ini ./playbooks/set_hostname_timezone.yml
+    ansible-playbook -i inventory.ini ./playbooks/set_hostname_timezone.yml --ask-vault-pass 
 }
 
 function deploy_sshKey() { 
