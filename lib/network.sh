@@ -46,6 +46,10 @@ function changeIP() {
     log_info "Netplan file found: $netplan_file"
 
     log_warn "[INFO] iface=$iface, new_ip=$IP, gateway=$GATEWAY, dns=$DNS"
+    
+    #backup netplan file with timestamp
+    timestamp=$(date +%Y%m%d_%H%M%S)
+    cp "$netplan_file" "${netplan_file}.$timestamp.bak"
 
     # Ghi cấu hình mới
     cat > "$netplan_file" <<EOF
