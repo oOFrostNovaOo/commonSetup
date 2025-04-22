@@ -17,7 +17,7 @@ function ansible_change_IP() {
     fi
     
     #check if vault.yml is encrypted
-    if grep -q '^\$ANSIBLE_VAULT;' ./group_vars/all/vault.yml; then
+    if grep -i '$ANSIBLE_VAULT;' ./group_vars/all/vault.yml; then
         echo "File vault.yml is already encrypted."
     else
         echo "File vault.yml is not encrypted. Encrypting..."
