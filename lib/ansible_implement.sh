@@ -14,10 +14,17 @@ function ansible_change_IP() {
     if [ ! -f ./group_vars/all/vault.yml ]; then
         echo "File vault.yml not found. Please create it first."
         exit 1
+    fi
+    
+    #check if vault.yml is encrypted
+    if grep -q '^\$ANSIBLE_VAULT;' ./group_vars/all/vault.yml; then
+        echo "File vault.yml is already encrypted."
     else
+        echo "File vault.yml is not encrypted. Encrypting..."
         # Encrypt vault file
         ansible-vault encrypt ./group_vars/all/vault.yml #--vault-password-file ~/.ansible_vault_pass.txt
     fi
+ 
     #kiem tra ton tai cua file inventory_pre.ini
     if [ ! -f ./inventory_pre.ini ]; then
         echo "File inventory_pre.ini not found. Please create it first."
