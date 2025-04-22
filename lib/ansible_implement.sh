@@ -37,12 +37,15 @@ function ansible_change_IP() {
         sudo apt install -y sshpass
     fi
     # Run Ansible to change IP
-    ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory_pre.ini ./playbooks/setup_ip_clients.yml --ask-vault-pass  
+    ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory_pre.ini ./playbooks/setup_ip_clients.yml --ask-vault-pass
+
+    #remove vault file
+    rm -f ./group_vars/all/vault.yml
 }
 
 function ansible_change_hostname_timezone() {
     # Ansible changes hostname
-    ansible-playbook -i inventory.ini ./playbooks/set_hostname_timezone.yml --ask-vault-pass 
+    ansible-playbook -i inventory.ini ./playbooks/set_hostname_timezone.yml #--ask-vault-pass 
 }
 
 function deploy_sshKey() { 

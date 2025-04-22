@@ -64,7 +64,7 @@ for OCTET in $(seq $START $END); do
   IP="${BASE_IP}.${OCTET}"
 
   # Ghi inventory
-  echo "$HOSTNAME ansible_host=$IP  ansible_ssh_private_key_file=~/.ssh/id_rsa" >> inventory.ini
+  echo "$HOSTNAME ansible_host=$IP" >> inventory.ini
 
   # Ghi host_vars
   cat <<EOF > host_vars/${HOSTNAME}.yml
@@ -81,8 +81,10 @@ done
 
 echo "" >> inventory.ini
 echo "[all:vars]" >> inventory.ini
+echo "ansible_connection=ssh" >> inventory.ini
 echo "ansible_user=ubuntu" >> inventory.ini  
 echo "ansible_ssh_private_key_file=~/.ssh/id_rsa" >> inventory.ini
 echo "ansible_ssh_common_args='-o ConnectTimeout=5 -o StrictHostKeyChecking=no'" >> inventory.ini
+echo "ansible_become=yes" >> inventory.ini
 
 echo "✅ Done! Generated host_vars + inventory.ini"

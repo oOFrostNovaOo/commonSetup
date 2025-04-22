@@ -1,6 +1,6 @@
 - name: Set hostname and timezone
   hosts: all
-  become: yes
+  #become: yes
 
   tasks:
     - name: Set hostname using hostnamectl
